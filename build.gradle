@@ -15,4 +15,6 @@ repositories {
 
 dependencies {
   providedCompile 'javax.servlet:servlet-api:2.5'
+  compile 'org.hibernate:hibernate-core:5.2.2.Final'
+  compile 'mysql:mysql-connector-java:6.0.3'
 }
