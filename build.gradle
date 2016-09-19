@@ -16,5 +16,19 @@ repositories {
 dependencies {
   providedCompile 'javax.servlet:servlet-api:2.5'
   compile 'org.hibernate:hibernate-core:5.2.2.Final'
-  compile 'mysql:mysql-connector-java:6.0.3'
+  compile  'mysql:mysql-connector-java:6.0.3'
 }
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.anteestudio.stock.StockMain'
+	attributes (
+	  "Class-Path": configurations.compile.collect { it.getName() }.join(' '))
+    }
+}
+
+task copyJars(type: Copy) {
+  from configurations.runtime
+  into 'build/libs'
+}
+  
