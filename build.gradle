@@ -1,10 +1,10 @@
 apply plugin: 'java'
 apply plugin: 'war'
-apply plugin: 'jetty'
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
 
-httpPort = 8080
-stopPort = 9090
-stopKey = 'stopKey'
+//httpPort = 8080
+//stopPort = 9090
+//stopKey = 'stopKey'
 
 //sourceCompatibility=1.6
 //targetCompatibility=1.6
@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-  providedCompile 'javax.servlet:servlet-api:2.5'
+  //providedCompile 'javax.servlet:servlet-api:2.5'
   compile 'org.hibernate:hibernate-core:5.2.2.Final'
   compile  'mysql:mysql-connector-java:6.0.3'
 }

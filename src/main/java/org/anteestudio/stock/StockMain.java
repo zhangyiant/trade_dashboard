@@ -13,7 +13,9 @@ public class StockMain {
 	StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
 	SessionFactory sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 	Session session = sessionFactory.openSession();
-	List result = session.createQuery("from StockClosedTransaction").list();
+	List<StockClosedTransaction> result =
+	    (List<StockClosedTransaction>)session.
+	    createQuery("from StockClosedTransaction").list();
 
 	for ( StockClosedTransaction s: (List<StockClosedTransaction>) result) {
 	    System.out.println(s.getSymbol());
