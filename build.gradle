@@ -1,6 +1,5 @@
 apply plugin: 'java'
 apply plugin: 'war'
-apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
 
 //httpPort = 8080
 //stopPort = 9090
@@ -13,22 +12,15 @@ repositories {
   mavenCentral()
 }
 
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+
+gretty {
+  servletContainer = 'jetty9'
+}
+
 dependencies {
-  //providedCompile 'javax.servlet:servlet-api:2.5'
   compile 'org.hibernate:hibernate-core:5.2.2.Final'
-  compile  'mysql:mysql-connector-java:6.0.3'
+  compile 'mysql:mysql-connector-java:6.0.3'
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': 'org.anteestudio.stock.StockMain'
-	attributes (
-	  "Class-Path": configurations.compile.collect { it.getName() }.join(' '))
-    }
-}
-
-task copyJars(type: Copy) {
-  from configurations.runtime
-  into 'build/libs'
-}
   
