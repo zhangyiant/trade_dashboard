@@ -5,7 +5,7 @@ import java.util.Date;
 public class StockClosedTransaction {
     private Long transId;
     private String symbol;
-    //   private float buyPrice;
+    private float buyPrice;
     //private Date buyDate;
     //private float sellPrice;
     //private Date sellDate;
@@ -26,5 +26,11 @@ public class StockClosedTransaction {
     }
     public void setSymbol(String symbol) {
 	this.symbol = symbol;
+    }
+    public float getBuyPrice() {
+	return buyPrice;
+    }
+    public void setBuyPrice(float buyPrice) {
+	this.buyPrice = buyPrice;
     }
 }

@@ -35,7 +35,9 @@ public class HelloWorldServlet extends HttpServlet {
 
 	for ( StockClosedTransaction s: (List<StockClosedTransaction>) result) {
 	    out.println("<li>");
-	    out.println(s.getSymbol());
+	    out.print(s.getSymbol());
+	    out.print(s.getBuyPrice());
+	    out.println("");
 	    out.println("</li>");
 	}
 
