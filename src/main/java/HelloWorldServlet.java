@@ -27,21 +27,39 @@ public class HelloWorldServlet extends HttpServlet {
 	out.println("<html>");
 	out.println("<head><title>My Servlet</title></head>");
 	out.println("<body>");
-	out.println("<ul>");
+	out.println("<table>");
 
 	List<StockClosedTransaction> result =
 	    (List<StockClosedTransaction>)session.
 	    createQuery("from StockClosedTransaction").list();
 
 	for ( StockClosedTransaction s: (List<StockClosedTransaction>) result) {
-	    out.println("<li>");
-	    out.print(s.getSymbol());
-	    out.print(s.getBuyPrice());
-	    out.println("");
-	    out.println("</li>");
+	    out.println("<tr>");
+	    out.println("<td>");
+	    out.println(s.getTransId());
+	    out.println("</td>");
+	    out.println("<td>");
+	    out.println(s.getSymbol());
+	    out.println("</td>");
+	    out.println("<td>");
+	    out.println(s.getBuyPrice());
+	    out.println("</td>");
+	    out.println("<td>");
+	    out.println(s.getBuyDate());
+	    out.println("</td>");
+	    out.println("<td>");
+	    out.println(s.getSellPrice());
+	    out.println("</td>");
+	    out.println("<td>");
+	    out.println(s.getSellDate());
+	    out.println("</td>");
+	    out.println("<td>");
+	    out.println(s.getQuantity());
+	    out.println("</td>");
+	    out.println("</tr>");
 	}
 
-	out.println("</ul>");
+	out.println("</table>");
 	out.println("</body>");
 	out.println("</html>");
 
