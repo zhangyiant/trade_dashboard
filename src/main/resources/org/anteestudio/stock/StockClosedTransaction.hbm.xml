@@ -18,12 +18,10 @@
         </id>
 	<property name="symbol" column="symbol"/>
 	<property name="buyPrice" column="buy_price" />
-	<!--
-	<property name="buy_date" />
-	<property name="sell_price" />
-	<property name="sell_date" />
-	<property name="quantity" />
-	-->
+	<property name="buyDate" column="buy_date" />
+	<property name="sellPrice" column="sell_price" />
+	<property name="sellDate" column="sell_date" />
+	<property name="quantity" column="quantity" />
     </class>
 
 </hibernate-mapping>
