@@ -21,6 +21,7 @@
     <property name="show_sql">true</property>
 
     <mapping resource="org/anteestudio/stock/StockClosedTransaction.hbm.xml" />
+    <mapping resource="org/anteestudio/stock/StockTransaction.hbm.xml" />
   </session-factory>
 </hibernate-configuration>
 
