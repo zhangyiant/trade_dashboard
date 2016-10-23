@@ -26,8 +26,9 @@ public class HelloWorldServlet2 extends HttpServlet {
 
 	out.println("<html>");
 	out.println("<head><title>My Servlet</title></head>");
+ 	out.println("<link href='bootstrap-3.3.7-dist/css/bootstrap.min.css' rel='stylesheet'>");
 	out.println("<body>");
-	out.println("<table>");
+	out.println("<table class='table table-striped'>");
 
 	List<StockTransaction> result =
 	    (List<StockTransaction>)session.
@@ -57,6 +58,8 @@ public class HelloWorldServlet2 extends HttpServlet {
 	}
 
 	out.println("</table>");
+ 	out.println("<script src='js/jquery-3.1.1.min.js'></script>");
+	out.println("<script src='bootstrap-3.3.7-dist/js/bootstrap.min.js'></script>");       
 	out.println("</body>");
 	out.println("</html>");
 
