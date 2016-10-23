@@ -1,14 +1,14 @@
 package org.anteestudio.stock;
 
-import java.sql.Date;
+import java.time.Instant;
 
 public class StockClosedTransaction {
     private Long transId;
     private String symbol;
     private float buyPrice;
-    private Date buyDate;
+    private Instant buyDate;
     private float sellPrice;
-    private Date sellDate;
+    private Instant sellDate;
     private Long quantity;
 
     public StockClosedTransaction() {
@@ -33,10 +33,10 @@ public class StockClosedTransaction {
     public void setBuyPrice(float buyPrice) {
 	this.buyPrice = buyPrice;
     }
-    public Date getBuyDate() {
+    public Instant getBuyDate() {
 	return buyDate;
     }
-    public void setBuyDate(Date buyDate) {
+    public void setBuyDate(Instant buyDate) {
 	this.buyDate = buyDate;
 	return;
     }
@@ -47,10 +47,10 @@ public class StockClosedTransaction {
 	this.sellPrice = sellPrice;
 	return;
     }
-    public Date getSellDate() {
+    public Instant getSellDate() {
 	return sellDate;
     }
-    public void setSellDate(Date sellDate) {
+    public void setSellDate(Instant sellDate) {
 	this.sellDate = sellDate;
 	return;
     }

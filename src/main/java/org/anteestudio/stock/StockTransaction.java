@@ -1,6 +1,6 @@
 package org.anteestudio.stock;
 
-import java.sql.Date;
+import java.time.Instant;
 
 public class StockTransaction {
     private Long transId;
@@ -8,7 +8,7 @@ public class StockTransaction {
     private String buyOrSell;
     private Long quantity;
     private float price;
-    private Date date;
+    private Instant date;
 
     public StockTransaction() {
     }
@@ -47,10 +47,10 @@ public class StockTransaction {
 	this.price = price;
 	return;
     }
-    public Date getDate() {
+    public Instant getDate() {
 	return date;
     }
-    public void setDate(Date date) {
+    public void setDate(Instant date) {
 	this.date = date;
 	return;
     }
