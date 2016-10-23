@@ -31,7 +31,7 @@ public class HelloWorldServlet extends HttpServlet {
 
 	List<StockClosedTransaction> result =
 	    (List<StockClosedTransaction>)session.
-	    createQuery("from StockClosedTransaction").list();
+	    createQuery("from StockClosedTransaction StockClosedTransaction order by StockClosedTransaction.sellDate desc").list();
 
 	for ( StockClosedTransaction s: (List<StockClosedTransaction>) result) {
 	    out.println("<tr>");
