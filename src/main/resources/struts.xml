@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+  <constant name="struts.devMode" value="true" />
+  <constant name="struts.action.excludePattern" value="/HelloWorld,/HelloWorld2" />
+  <package name="tutorial" extends="struts-default">
+    <action name="NewHelloWorld2" class="NewHelloWorld2">
+      <result>/HelloWorld.jsp</result>
+    </action>
+  </package>
+</struts>
