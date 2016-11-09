@@ -11,15 +11,15 @@ apply plugin: 'war'
 repositories {
   //mavenCentral()
   maven {
-  url "http://192.168.1.249:8081/maven2"
+  url "http://192.168.1.249:8081/artifactory/maven2"
   }
 }
 
-apply from: 'gretty.plugin'
+//apply from: 'gretty.plugin'
 
-gretty {
-  servletContainer = 'jetty9'
-}
+//gretty {
+//  servletContainer = 'jetty9'
+//}
 
 dependencies {
   compile 'org.hibernate:hibernate-core:5.2.2.Final'
