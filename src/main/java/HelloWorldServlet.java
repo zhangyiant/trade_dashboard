@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.util.List;
+import java.time.ZoneOffset;
+import java.time.OffsetDateTime;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,6 +33,7 @@ public class HelloWorldServlet extends HttpServlet {
 	WebApplicationContext wtx = WebApplicationContextUtils.getWebApplicationContext(ctx);
 	NewHelloWorld newHelloWorld = wtx.getBean("newHelloWorld", NewHelloWorld.class);
 
+    ZoneOffset zo = ZoneOffset.UTC;
 	out.println("<html>");
 	out.println("<head><title>My Servlet</title></head>");
 	out.println("<link href='bootstrap-3.3.7-dist/css/bootstrap.min.css' rel='stylesheet'>");
@@ -61,7 +64,8 @@ public class HelloWorldServlet extends HttpServlet {
 	    out.println(s.getSellPrice());
 	    out.println("</td>");
 	    out.println("<td>");
-	    out.println(s.getSellDate());
+        OffsetDateTime dt = s.getSellDate().atOffset(zo);
+	    out.println(dt);
 	    out.println("</td>");
 	    out.println("<td>");
 	    out.println(s.getQuantity());
