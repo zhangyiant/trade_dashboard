@@ -8,9 +8,11 @@
     <property name="connection.driver_class">
       com.mysql.jdbc.Driver
     </property>
-
+    <property name="jdbc.time_zone">
+      UTC
+    </property>
     <property name="connection.url">
-      jdbc:mysql://192.168.1.235/my_test_db
+      jdbc:mysql://192.168.1.235/my_test_db?useLegacyDatetimeCode=false
     </property>
     <property name="connection.username">
       root

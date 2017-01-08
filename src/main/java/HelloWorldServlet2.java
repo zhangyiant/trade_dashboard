@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.util.List;
+import java.time.ZoneOffset;
+import java.time.OffsetDateTime;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +25,8 @@ public class HelloWorldServlet2 extends HttpServlet {
 	resp.setContentType("text/html;charset=UTF-8");
 
 	PrintWriter out = resp.getWriter();
+
+    ZoneOffset zo = ZoneOffset.ofHours(8);
 
 	out.println("<html>");
 	out.println("<head><title>My Servlet</title></head>");
@@ -52,7 +56,8 @@ public class HelloWorldServlet2 extends HttpServlet {
 	    out.println(s.getPrice());
 	    out.println("</td>");
 	    out.println("<td>");
-	    out.println(s.getDate());
+        OffsetDateTime dt1 = s.getDate().atOffset(zo);
+        out.println(dt1);
 	    out.println("</td>");
 	    out.println("</tr>");
 	}

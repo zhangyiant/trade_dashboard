@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.List;
+import java.util.TimeZone;
 import java.time.ZoneOffset;
 import java.time.OffsetDateTime;
 import javax.servlet.ServletContext;
@@ -20,10 +21,10 @@ public class HelloWorldServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-	throws ServletException, IOException {
+        throws ServletException, IOException {
 
 	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-	Session session = sessionFactory.openSession();
+    Session session = sessionFactory.openSession();
 
 	resp.setContentType("text/html;charset=UTF-8");
 
@@ -33,7 +34,7 @@ public class HelloWorldServlet extends HttpServlet {
 	WebApplicationContext wtx = WebApplicationContextUtils.getWebApplicationContext(ctx);
 	NewHelloWorld newHelloWorld = wtx.getBean("newHelloWorld", NewHelloWorld.class);
 
-    ZoneOffset zo = ZoneOffset.UTC;
+    ZoneOffset zo = ZoneOffset.ofHours(8);
 	out.println("<html>");
 	out.println("<head><title>My Servlet</title></head>");
 	out.println("<link href='bootstrap-3.3.7-dist/css/bootstrap.min.css' rel='stylesheet'>");
@@ -58,14 +59,15 @@ public class HelloWorldServlet extends HttpServlet {
 	    out.println(s.getBuyPrice());
 	    out.println("</td>");
 	    out.println("<td>");
-	    out.println(s.getBuyDate());
+        OffsetDateTime dt1 = s.getBuyDate().atOffset(zo);
+        out.println(dt1);
 	    out.println("</td>");
 	    out.println("<td>");
 	    out.println(s.getSellPrice());
 	    out.println("</td>");
 	    out.println("<td>");
-        OffsetDateTime dt = s.getSellDate().atOffset(zo);
-	    out.println(dt);
+        OffsetDateTime dt2 = s.getSellDate().atOffset(zo);
+	    out.println(dt2);
 	    out.println("</td>");
 	    out.println("<td>");
 	    out.println(s.getQuantity());

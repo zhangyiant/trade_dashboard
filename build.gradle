@@ -22,7 +22,7 @@ gretty {
 }
 
 dependencies {
-  compile 'org.hibernate:hibernate-core:5.2.2.Final'
+  compile 'org.hibernate:hibernate-core:5.2.3.Final'
   compile 'mysql:mysql-connector-java:5.1.40'
   compile("org.springframework:spring-context:4.3.3.RELEASE")
   compile("org.springframework:spring-web:4.3.3.RELEASE")
