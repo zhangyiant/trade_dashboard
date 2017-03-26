@@ -12,20 +12,21 @@ public class HibernateUtil {
     private static final SessionFactory sessionFactory;
 
     static {
-	try {
-        StandardServiceRegistryBuilder builder =
-            new StandardServiceRegistryBuilder();
-        builder.configure();
-	    StandardServiceRegistry registry = builder.build();
-	    sessionFactory =
-		new MetadataSources(registry).buildMetadata().buildSessionFactory();
-	} catch (Throwable ex) {
-	    System.err.println("Initial SessionFactory creation failed." + ex);
-	    throw new ExceptionInInitializerError(ex);
-	}
+        try {
+            StandardServiceRegistryBuilder builder =
+                new StandardServiceRegistryBuilder();
+            builder.configure();
+            StandardServiceRegistry registry = builder.build();
+            sessionFactory =
+                new MetadataSources(registry).buildMetadata().
+                buildSessionFactory();
+        } catch (Throwable ex) {
+            System.err.println("Initial SessionFactory creation failed." + ex);
+            throw new ExceptionInInitializerError(ex);
+        }
     }
 
     public static SessionFactory getSessionFactory() {
-	return sessionFactory;
+        return sessionFactory;
     }
 }
