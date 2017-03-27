@@ -6,6 +6,9 @@
 	xsi:schemaLocation="
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+  <beans:bean id="mySessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+    <beans:property name="configLocation" value="classpath:hibernate.cfg.xml" />
+  </beans:bean>
   <beans:bean id="newHelloWorld" class="NewHelloWorld">
     <beans:property name="message" value="Hello World" />
   </beans:bean>

@@ -20,19 +20,21 @@ public class HelloWorldServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+    protected void doGet(HttpServletRequest req,
+                         HttpServletResponse resp)
         throws ServletException, IOException {
 
-	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-    Session session = sessionFactory.openSession();
+        resp.setContentType("text/html;charset=UTF-8");
 
-	resp.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = resp.getWriter();
 
-	PrintWriter out = resp.getWriter();
+        ServletContext ctx = this.getServletContext();
+        WebApplicationContext wtx = WebApplicationContextUtils.getWebApplicationContext(ctx);
+        NewHelloWorld newHelloWorld = wtx.getBean("newHelloWorld", NewHelloWorld.class);
 
-	ServletContext ctx = this.getServletContext();
-	WebApplicationContext wtx = WebApplicationContextUtils.getWebApplicationContext(ctx);
-	NewHelloWorld newHelloWorld = wtx.getBean("newHelloWorld", NewHelloWorld.class);
+        SessionFactory sessionFactory =
+            wtx.getBean("mySessionFactory", SessionFactory.class);
+        Session session = sessionFactory.openSession();
 
     ZoneOffset zo = ZoneOffset.ofHours(8);
 	out.println("<html>");
