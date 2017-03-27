@@ -8,6 +8,7 @@ apply plugin: 'war'
 //sourceCompatibility=1.6
 //targetCompatibility=1.6
 
+// test
 repositories {
   //mavenCentral()
   maven {
@@ -27,6 +28,7 @@ dependencies {
   compile("org.springframework:spring-context:4.3.3.RELEASE")
   compile("org.springframework:spring-web:4.3.3.RELEASE")
   compile("org.apache.struts:struts2-core:2.5.5")
+  compile("org.apache.struts:struts2-spring-plugin:2.5.10.1")
   testCompile("org.springframwork:spring-test:4.3.3.RELEASE")
 }
 
