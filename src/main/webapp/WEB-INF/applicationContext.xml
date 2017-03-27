@@ -9,4 +9,8 @@
   <beans:bean id="newHelloWorld" class="NewHelloWorld">
     <beans:property name="message" value="Hello World" />
   </beans:bean>
+  <beans:bean id="newspringbean" class="NewHelloWorld2" scope="prototype">
+    <beans:property name="message" value="Struts with spring is up and running ..." />
+  </beans:bean>
+
 </beans:beans>
