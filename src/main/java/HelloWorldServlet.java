@@ -8,7 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.anteestudio.stock.HibernateUtil;
 import org.anteestudio.stock.StockClosedTransaction;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

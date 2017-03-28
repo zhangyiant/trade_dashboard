@@ -2,25 +2,31 @@ import java.io.IOException;
 import java.util.List;
 import java.time.ZoneOffset;
 import java.time.OffsetDateTime;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.anteestudio.stock.HibernateUtil;
 import org.anteestudio.stock.StockTransaction;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import java.io.PrintWriter;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class HelloWorldServlet2 extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-	throws ServletException, IOException {
+        throws ServletException, IOException {
 
-	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-	Session session = sessionFactory.openSession();
+        ServletContext ctx = this.getServletContext();
+        WebApplicationContext wtx = WebApplicationContextUtils.
+            getWebApplicationContext(ctx);
+        SessionFactory sessionFactory =
+            wtx.getBean("mySessionFactory", SessionFactory.class);
+        Session session = sessionFactory.openSession();
 
 	resp.setContentType("text/html;charset=UTF-8");
 
