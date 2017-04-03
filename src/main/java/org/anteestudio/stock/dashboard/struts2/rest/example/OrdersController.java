@@ -1,5 +1,7 @@
 package org.anteestudio.stock.dashboard.struts2.rest.example;
 
+import javax.servlet.http.HttpServletResponse;
+import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ModelDriven;
 import org.apache.struts2.convention.annotation.Action;
 
@@ -10,7 +12,7 @@ public class OrdersController {
     private int[] a;
     
     public String getName() {
-        return "HelloWorld";
+        return "Hell我的";
     }
     public void setName(String name) {
         return;
@@ -40,8 +42,10 @@ public class OrdersController {
     @Action(className="orderscontroller")
     public String show() {
         this.id = "ABCDEF";
-        this.name = "QQ";
+        this.name = "QQ我的";
         this.a = getQQ();
+        HttpServletResponse response = null;
+
         return "show";
     }
 
