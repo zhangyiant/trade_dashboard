@@ -15,5 +15,15 @@
   <beans:bean id="newspringbean" class="NewHelloWorld2" scope="prototype">
     <beans:property name="message" value="Struts with spring is up and running ..." />
   </beans:bean>
-
+  <beans:bean id="HelloWorldBean" class="org.anteestudio.stock.dashboard.struts2.HelloWorld" scope="prototype">
+    <beans:property name="message" value="MESSAGE again from Spring." />
+  </beans:bean>
+  <beans:bean id="myorder" class="org.anteestudio.stock.dashboard.struts2.rest.example.Order">
+    <beans:property name="id" value="1" />
+    <beans:property name="name" value="myorderfromsprint" />
+    <beans:property name="price" value="3.17" />
+  </beans:bean>
+  <beans:bean id="orderscontroller" class="org.anteestudio.stock.dashboard.struts2.rest.example.OrdersController" scope="prototype">
+    <beans:property name="order" ref="myorder" />
+  </beans:bean>
 </beans:beans>
