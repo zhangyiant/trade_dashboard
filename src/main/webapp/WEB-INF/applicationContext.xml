@@ -6,8 +6,28 @@
 	xsi:schemaLocation="
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+  <beans:bean id="myDataSource"
+              class="org.apache.commons.dbcp2.BasicDataSource"
+              destroy-method="close">
+    <beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+    <beans:property name="url" value="jdbc:mysql://192.168.1.235/my_test_db?useLegacyDatetimeCode=false" />
+    <beans:property name="username" value="root" />
+    <beans:property name="password" value="123456" />
+  </beans:bean>
   <beans:bean id="mySessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-    <beans:property name="configLocation" value="classpath:hibernate.cfg.xml" />
+    <beans:property name="dataSource" ref="myDataSource" />
+    <beans:property name="mappingResources">
+      <beans:list>
+        <beans:value>org/anteestudio/stock/StockClosedTransaction.hbm.xml</beans:value>
+        <beans:value>org/anteestudio/stock/StockTransaction.hbm.xml</beans:value>
+        </beans:list>
+    </beans:property>
+    <beans:property name="hibernateProperties">
+      <beans:value>
+        hibernate.show_sql=true
+        hibernate.jdbc.time_zone=UTC
+      </beans:value>
+    </beans:property>
   </beans:bean>
   <beans:bean id="newHelloWorld" class="NewHelloWorld">
     <beans:property name="message" value="Hello World" />
