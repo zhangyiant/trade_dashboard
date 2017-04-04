@@ -3,9 +3,11 @@ package org.anteestudio.stock.dashboard.struts2.rest.example;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.convention.annotation.Action;
 
-public class OrdersController {
+public class OrdersController
+    implements ModelDriven<Object> {
     private Order model;
     private String id;
     private String name;
@@ -40,6 +42,12 @@ public class OrdersController {
     }
 
     @Action(className="orderscontroller")
+    public String index() {
+        this.id = "ABCDEF";
+        return "index";
+    }
+
+    @Action(className="orderscontroller")
     public String show() {
         this.id = "ABCDEF";
         this.name = "QQ我的";
@@ -49,7 +57,7 @@ public class OrdersController {
         return "show";
     }
 
-    public Order getModel() {
+    public Object getModel() {
         return this.model;
     }
 }

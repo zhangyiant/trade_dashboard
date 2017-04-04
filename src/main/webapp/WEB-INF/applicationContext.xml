@@ -22,6 +22,11 @@
         <beans:value>org/anteestudio/stock/StockTransaction.hbm.xml</beans:value>
         </beans:list>
     </beans:property>
+    <beans:property name="annotatedClasses">
+      <beans:list>
+        <beans:value>org.anteestudio.stock.hbm.AllInvestmentsHistory</beans:value>
+      </beans:list>
+    </beans:property>
     <beans:property name="hibernateProperties">
       <beans:value>
         hibernate.show_sql=true
@@ -42,8 +47,12 @@
     <beans:property name="id" value="1" />
     <beans:property name="name" value="不是我的myorderfromsprint" />
     <beans:property name="price" value="3.17" />
-  </beans:bean>
+    </beans:bean>
   <beans:bean id="orderscontroller" class="org.anteestudio.stock.dashboard.struts2.rest.example.OrdersController" scope="prototype">
     <beans:property name="order" ref="myorder" />
   </beans:bean>
+  <beans:bean id="allInvestmentsHistoriesController" class="org.anteestudio.stock.dashboard.struts2.rest.AllInvestmentsHistoriesController" scope="prototype">
+    <beans:property name="sessionFactory" ref="mySessionFactory" />
+  </beans:bean>
+
 </beans:beans>
