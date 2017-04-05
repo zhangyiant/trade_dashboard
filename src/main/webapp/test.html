@@ -1,0 +1,38 @@
+<html ng-app="myApp">
+    <head>
+        <title>test</title>
+        <link href='bootstrap-3.3.7-dist/css/bootstrap.min.css' rel='stylesheet'>
+        <script src="js/angular.min.js"></script>
+        <script src="js/all-investments-histories-controller.js"></script>
+    </head>
+    <body ng-controller="myCtrl">
+        <table class='table table-striped'>
+            <thead>
+                <tr>
+                    <th>
+                        id
+                    </th>
+                    <th>
+                        total value
+                    </th>
+                    <th>
+                        datetime
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="allInvestmentsHistory in allInvestmentsHistories">
+                    <td>
+                        {{allInvestmentsHistory.id}}
+                    </td>
+                    <td>
+                        {{allInvestmentsHistory.totalValue}}
+                    </td>
+                    <td>
+                        {{allInvestmentsHistory.epochMilli | epochMilliToDatetimeString}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

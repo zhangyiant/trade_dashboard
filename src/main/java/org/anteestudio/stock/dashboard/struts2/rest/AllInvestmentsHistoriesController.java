@@ -11,9 +11,9 @@ import org.hibernate.SessionFactory;
 
 public class AllInvestmentsHistoriesController
     implements ModelDriven<Object> {
-    
+
     private SessionFactory sessionFactory;
-    private List<AllInvestmentsHistory> model;
+    private List<AllInvestmentsHistoryData> model;
 
     public SessionFactory getSessionFactory() {
         return this.sessionFactory;
@@ -28,13 +28,23 @@ public class AllInvestmentsHistoriesController
     }
 
     @Action(className="allInvestmentsHistoriesController")
-    public String show() {
+    public String index() {
         Session session = sessionFactory.openSession();
         List<AllInvestmentsHistory> result =
-            (List<AllInvestmentsHistory>)session.createQuery("from AllInvestmentsHistory").list();
-        model = result;
+            (List<AllInvestmentsHistory>)session.
+            createQuery("from AllInvestmentsHistory AllInvestmentsHistory " +
+                        "order by AllInvestmentsHistory.datetime desc").
+            list();
+        this.model = new ArrayList<AllInvestmentsHistoryData>();
+        for (AllInvestmentsHistory a: result) {
+            AllInvestmentsHistoryData d = new AllInvestmentsHistoryData();
+            d.setId(a.getId());
+            d.setTotalValue(a.getTotalValue());
+            d.setEpochMilli(a.getDatetime().toEpochMilli());
+            this.model.add(d);
+        }
         session.close();
-        return "show";
+        return "index";
     }
 
     public Object getModel() {
