@@ -14,6 +14,7 @@ public class AllInvestmentsHistoriesController
     
     private SessionFactory sessionFactory;
     private List<AllInvestmentsHistory> model;
+
     public SessionFactory getSessionFactory() {
         return this.sessionFactory;
     }
@@ -28,9 +29,6 @@ public class AllInvestmentsHistoriesController
 
     @Action(className="allInvestmentsHistoriesController")
     public String show() {
-        //this.model = new ArrayList<AllInvestmentsHistory>();
-        //AllInvestmentsHistory t = new AllInvestmentsHistory();
-        //this.model.add(t);
         Session session = sessionFactory.openSession();
         List<AllInvestmentsHistory> result =
             (List<AllInvestmentsHistory>)session.createQuery("from AllInvestmentsHistory").list();
