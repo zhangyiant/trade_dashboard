@@ -2,19 +2,25 @@ package org.anteestudio.stock.dashboard.struts2.rest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Date;
+import java.util.Calendar;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import org.anteestudio.stock.hbm.AllInvestmentsHistory;
 import org.apache.struts2.convention.annotation.Action;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import javax.persistence.TemporalType;
 
 public class AllInvestmentsHistoriesController
     implements ModelDriven<Object> {
 
     private SessionFactory sessionFactory;
     private List<AllInvestmentsHistoryData> model;
-
+    private String period;
     public SessionFactory getSessionFactory() {
         return this.sessionFactory;
     }
@@ -23,18 +29,48 @@ public class AllInvestmentsHistoriesController
         return;
     }
 
-    public void setId(String id) {
+    public void setPeriod(String period) {
+        this.period = period;
         return;
     }
-
+      
     @Action(className="allInvestmentsHistoriesController")
     public String index() {
         Session session = sessionFactory.openSession();
-        List<AllInvestmentsHistory> result =
-            (List<AllInvestmentsHistory>)session.
-            createQuery("from AllInvestmentsHistory AllInvestmentsHistory " +
-                        "order by AllInvestmentsHistory.datetime desc").
-            list();
+        Instant i = Instant.now();
+        Instant t;
+        String queryString;
+
+        List<AllInvestmentsHistory> result;
+        if (period == null) {
+            queryString = "from AllInvestmentsHistory AllInvestmentsHistory " +
+                "order by AllInvestmentsHistory.datetime desc";
+            result = (List<AllInvestmentsHistory>)session.
+                createQuery(queryString).list();
+        } else if (period.equals("all")) {
+            queryString = "from AllInvestmentsHistory AllInvestmentsHistory " +
+                "order by AllInvestmentsHistory.datetime desc";
+            result = (List<AllInvestmentsHistory>)session.
+                createQuery(queryString).list();
+        } else {
+            if (period.equals("1month")) {
+                t = i.minusSeconds(60*60*24*30);
+            } else if (period.equals("6month")) {
+                t = i.minusSeconds(6*60*60*24*30);
+            } else if (period.equals("1year")) {
+                t = i.minusSeconds(12*60*60*24*30);
+            } else {
+                t = i;
+            }
+            result =
+                (List<AllInvestmentsHistory>)session.
+                createQuery("from AllInvestmentsHistory AllInvestmentsHistory " +
+                            "where AllInvestmentsHistory.datetime > :timestamp " + 
+                            "order by AllInvestmentsHistory.datetime desc").
+                setParameter("timestamp", t, TemporalType.TIMESTAMP).
+                list();
+        }
+
         this.model = new ArrayList<AllInvestmentsHistoryData>();
         for (AllInvestmentsHistory a: result) {
             AllInvestmentsHistoryData d = new AllInvestmentsHistoryData();

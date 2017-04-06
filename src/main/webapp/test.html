@@ -6,9 +6,16 @@
         <link href='bootstrap-3.3.7-dist/css/bootstrap.min.css' rel='stylesheet'>
         <script src="js/angular.min.js"></script>
         <script src="js/highcharts.js"></script>
-        <script src="js/all-investments-histories-controller.js"></script>
+         <script src="js/all-investments-histories-controller.js"></script>
     </head>
     <body ng-controller="myCtrl">
+        <select class="form-control" ng-model="period">
+            <option value="1month">1 month</option>
+            <option value="6month">6 mohtns</option>
+            <option value="1year">1 year</option>
+            <option value="all">All</option>
+        </select>
+        <button class="btn btn-default" ng-click="getData()">Search</button>
         <div id="trends"></div>
         <table class='table table-striped'>
             <thead>

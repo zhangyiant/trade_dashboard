@@ -32,14 +32,21 @@ app.controller('myCtrl', function($scope, $http) {
         });
         return;
     }
-    $http({
-        method: "GET",
-        url: "rest/all-investments-histories.json"
-    }).then(function successCallback(response) {
-        $scope.allInvestmentsHistories = response.data;
-        updateChart();
-    }, function errorCallback(response) {
-    });
+
+    $scope.getData = function() {
+        $http({
+            method: "GET",
+            url: "rest/all-investments-histories.json",
+            params: {period: $scope.period}
+        }).then(function successCallback(response) {
+            $scope.allInvestmentsHistories = response.data;
+            updateChart();
+        }, function errorCallback(response) {
+        });
+        return;
+    };
+    $scope.period = "all";
+    $scope.getData();
 });
 app.filter("epochMilliToDatetimeString", function () {
     return function(epochMilli) {
