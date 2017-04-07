@@ -32,7 +32,7 @@ app.controller('myCtrl', function($scope, $http) {
         });
         return;
     }
-
+    
     $scope.getData = function() {
         $http({
             method: "GET",
@@ -45,8 +45,20 @@ app.controller('myCtrl', function($scope, $http) {
         });
         return;
     };
-    $scope.symbol = "人民币账户白银";
-    $scope.getData();
+    function updateStockInfos() {
+        $http({
+            method: "GET",
+            url: "rest/stock-infos.json"
+        }).then(function successCallback(response) {
+            $scope.stockInfos = response.data;
+            if ($scope.stockInfos.length > 0) {
+                $scope.symbol = $scope.stockInfos[0].symbol;
+            }
+        }, function errorCallback(responsse) {
+        });
+        return;
+    }
+    updateStockInfos();
 });
 app.filter("epochMilliToDatetimeString", function () {
     return function(epochMilli) {

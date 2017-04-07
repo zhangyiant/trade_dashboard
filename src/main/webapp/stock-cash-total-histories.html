@@ -10,8 +10,10 @@
     </head>
     <body ng-controller="myCtrl">
         <select class="form-control" ng-model="symbol">
-            <option value="601398">601398</option>
-            <option value="人民币账户白银">人民币账户白银</option>
+            <option ng-repeat="stockInfo in stockInfos"
+                    value="{{stockInfo.symbol}}">
+                {{stockInfo.name}}
+            </option>
         </select>
         <button class="btn btn-default" ng-click="getData()">Search</button>
         <div id="trends"></div>
