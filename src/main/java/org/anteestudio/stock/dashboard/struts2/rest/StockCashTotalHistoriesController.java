@@ -13,6 +13,7 @@ import org.anteestudio.stock.hbm.StockCashTotalHistory;
 import org.apache.struts2.convention.annotation.Action;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.type.StringType;
 import javax.persistence.TemporalType;
 
 public class StockCashTotalHistoriesController
@@ -52,16 +53,17 @@ public class StockCashTotalHistoriesController
         if (symbol == null) {
             queryString = "from StockCashTotalHistory StockCashTotalHistory " +
                 "order by StockCashTotalHistory.datetime desc";
-            result = (List<StockCashTotalHistory>)session.
-                createQuery(queryString).list();
+            result = session.
+                createQuery(queryString, StockCashTotalHistory.class).
+                getResultList();
         } else {
             queryString = "from StockCashTotalHistory StockCashTotalHistory " +
-                "where StockCashTotalHistory.symbol = :symbol " +
+                "where StockCashTotalHistory.symbol = ? " +
                 "order by StockCashTotalHistory.datetime desc";
-            result = (List<StockCashTotalHistory>)session.
-                createQuery(queryString).
-                setString("symbol", symbol).
-                list();
+            result = session.
+                createQuery(queryString, StockCashTotalHistory.class).
+                setParameter(0, symbol, StringType.INSTANCE).
+                getResultList();
         }
         this.model = new ArrayList<StockCashTotalHistoryData>();
         for (StockCashTotalHistory a: result) {
