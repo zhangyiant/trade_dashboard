@@ -25,6 +25,7 @@
     <beans:property name="annotatedClasses">
       <beans:list>
         <beans:value>org.anteestudio.stock.hbm.AllInvestmentsHistory</beans:value>
+        <beans:value>org.anteestudio.stock.hbm.StockCashTotalHistory</beans:value>
       </beans:list>
     </beans:property>
     <beans:property name="hibernateProperties">
@@ -54,5 +55,7 @@
   <beans:bean id="allInvestmentsHistoriesController" class="org.anteestudio.stock.dashboard.struts2.rest.AllInvestmentsHistoriesController" scope="prototype">
     <beans:property name="sessionFactory" ref="mySessionFactory" />
   </beans:bean>
-
+  <beans:bean id="stockCashTotalHistoriesController" class="org.anteestudio.stock.dashboard.struts2.rest.StockCashTotalHistoriesController" scope="prototype">
+    <beans:property name="sessionFactory" ref="mySessionFactory" />
+  </beans:bean>
 </beans:beans>
