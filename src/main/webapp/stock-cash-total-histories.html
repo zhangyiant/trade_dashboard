@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+    <head>
+        <title>Stock Cash Total History</title>
+        <meta charset="utf-8" />
+        <link href='bootstrap-3.3.7-dist/css/bootstrap.min.css' rel='stylesheet'>
+        <script src="js/angular.min.js"></script>
+        <script src="js/highcharts.js"></script>
+         <script src="js/stock-cash-total-histories-controller.js"></script>
+    </head>
+    <body ng-controller="myCtrl">
+        <select class="form-control" ng-model="symbol">
+            <option value="601398">601398</option>
+            <option value="人民币账户白银">人民币账户白银</option>
+        </select>
+        <button class="btn btn-default" ng-click="getData()">Search</button>
+        <div id="trends"></div>
+        <table class='table table-striped'>
+            <thead>
+                <tr>
+                    <th>
+                        id
+                    </th>
+                    <th>
+                        symbol
+                    </th>
+                    <th>
+                        total value
+                    </th>
+                    <th>
+                        datetime
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="stockCashTotalHistory in stockCashTotalHistories">
+                    <td>
+                        {{stockCashTotalHistory.id}}
+                    </td>
+                    <td>
+                        {{stockCashTotalHistory.symbol}}
+                    <td>
+                        {{stockCashTotalHistory.totalValue}}
+                    </td>
+                    <td>
+                        {{stockCashTotalHistory.epochMilli | epochMilliToDatetimeString}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
