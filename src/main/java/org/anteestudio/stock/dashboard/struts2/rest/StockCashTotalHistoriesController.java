@@ -21,6 +21,7 @@ public class StockCashTotalHistoriesController
     private SessionFactory sessionFactory;
     private List<StockCashTotalHistoryData> model;
     private String period;
+    private String symbol;
 
     public SessionFactory getSessionFactory() {
         return this.sessionFactory;
@@ -34,7 +35,12 @@ public class StockCashTotalHistoriesController
         this.period = period;
         return;
     }
-      
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+        return;
+    }
+ 
     @Action(className="stockCashTotalHistoriesController")
     public String index() {
         Session session = sessionFactory.openSession();
@@ -43,11 +49,20 @@ public class StockCashTotalHistoriesController
         String queryString;
 
         List<StockCashTotalHistory> result;
-        queryString = "from StockCashTotalHistory StockCashTotalHistory " +
-            "order by StockCashTotalHistory.datetime desc";
-        result = (List<StockCashTotalHistory>)session.
-            createQuery(queryString).list();
-
+        if (symbol == null) {
+            queryString = "from StockCashTotalHistory StockCashTotalHistory " +
+                "order by StockCashTotalHistory.datetime desc";
+            result = (List<StockCashTotalHistory>)session.
+                createQuery(queryString).list();
+        } else {
+            queryString = "from StockCashTotalHistory StockCashTotalHistory " +
+                "where StockCashTotalHistory.symbol = :symbol " +
+                "order by StockCashTotalHistory.datetime desc";
+            result = (List<StockCashTotalHistory>)session.
+                createQuery(queryString).
+                setString("symbol", symbol).
+                list();
+        }
         this.model = new ArrayList<StockCashTotalHistoryData>();
         for (StockCashTotalHistory a: result) {
             StockCashTotalHistoryData d = new StockCashTotalHistoryData();
