@@ -1,16 +1,43 @@
 var app = angular.module("myApp", []);
 app.controller('myCtrl', function($scope, $http) {
-    function updateChart () {
+    function getPercentageData() {
         var data = new Array();
-        for (var counter = 0;
-             counter < $scope.allInvestmentsHistories.length;
+        var histories = $scope.allInvestmentsHistories;;
+        var historiesLength = histories.length;
+        var baseValue = histories[historiesLength - 1].totalValue;
+        for (counter = 0;
+             counter < historiesLength;
              counter++) {
             var point = new Array();
-            var d = $scope.allInvestmentsHistories[counter].epochMilli;
-            var v = $scope.allInvestmentsHistories[counter].totalValue;
+            var d = histories[counter].epochMilli;
+            var v = (histories[counter].totalValue - baseValue) / baseValue * 100;
             point.push(d);
             point.push(v);
             data.push(point);
+        }
+        return data;
+    }
+    function getAbsoluteValueData() {
+        var data = new Array();
+        var histories = $scope.allInvestmentsHistories;
+        for (counter = 0;
+             counter < histories.length;
+             counter++) {
+            var point = new Array();
+            var d = histories[counter].epochMilli;
+            var v = histories[counter].totalValue;
+            point.push(d);
+            point.push(v);
+            data.push(point);
+        }
+        return data;
+    }
+    function updateChart () {
+        var data;
+        if ($scope.percent === "percent") {
+            data = getPercentageData();
+        } else {
+            data = getAbsoluteValueData();
         }
         data.reverse();
         var chart = Highcharts.chart("trends", {
@@ -46,6 +73,7 @@ app.controller('myCtrl', function($scope, $http) {
         return;
     };
     $scope.period = "all";
+    $scope.percent = "value";
     $scope.getData();
 });
 app.filter("epochMilliToDatetimeString", function () {

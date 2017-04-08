@@ -15,6 +15,10 @@
             <option value="1year">1 year</option>
             <option value="all">All</option>
         </select>
+        <select class="form-control" ng-model="percent">
+            <option value="value">Value</option>
+            <option value="percent">Percentage</option>
+        </select>
         <button class="btn btn-default" ng-click="getData()">Search</button>
         <div id="trends"></div>
         <table class='table table-striped'>
