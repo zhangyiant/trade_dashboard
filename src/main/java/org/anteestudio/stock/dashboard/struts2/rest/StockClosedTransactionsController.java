@@ -45,16 +45,70 @@ public class StockClosedTransactionsController
     @Action(className="stockClosedTransactionsController")
     public String index() {
         Session session = sessionFactory.openSession();
+        Instant i = Instant.now();
+        Instant t = null;
+        String queryString;
+
+        if (period != null) {
+            if (period.equals("all")) {
+                t = i.minusSeconds(120*60*60*24*30);
+            } else if (period.equals("1month")) {
+                t = i.minusSeconds(1*60*60*24*30);
+            } else if (period.equals("3month")) {
+                t = i.minusSeconds(3*60*60*24*30);
+            } else if (period.equals("6month")) {
+                t = i.minusSeconds(6*60*60*24*30);
+            } else if (period.equals("1year")) {
+                t = i.minusSeconds(12*60*60*24*30);
+            } else {
+                t = i;
+            }
+        } else {
+            setPeriod("all");
+        }
 
         List<StockClosedTransaction> result;
-        String queryString = "from StockClosedTransaction " +
-            "StockClosedTransaction " +
-            "order by StockClosedTransaction.sellDatetime " +
-            "desc";
-        result = session.
-            createQuery(queryString,
-                        StockClosedTransaction.class).
-            getResultList();
+        if (symbol == null) {
+            if (period.equals("all")) {
+                queryString = "from StockClosedTransaction " +
+                    "StockClosedTransaction " +
+                    "order by StockClosedTransaction.sellDatetime desc";
+                result = session.
+                    createQuery(queryString, StockClosedTransaction.class).
+                    getResultList();
+            } else {
+                queryString = "from StockClosedTransaction " +
+                    "StockClosedTransaction " +
+                    "where StockClosedTransaction.sellDatetime > ? " +
+                    "order by StockClosedTransaction.sellDatetime desc";
+                result = session.
+                    createQuery(queryString, StockClosedTransaction.class).
+                    setParameter(0, t, TemporalType.TIMESTAMP).
+                    getResultList();
+            }
+        } else {
+            if (period.equals("all")) {
+                queryString = "from StockClosedTransaction " +
+                    "StockClosedTransaction " +
+                    "where StockClosedTransaction.symbol = ? " +
+                    "order by StockClosedTransaction.sellDatetime desc";
+                result = session.
+                    createQuery(queryString, StockClosedTransaction.class).
+                    setParameter(0, symbol, StringType.INSTANCE).
+                    getResultList();
+            } else {
+                queryString = "from StockClosedTransaction " +
+                    "StockClosedTransaction " +
+                    "where StockClosedTransaction.symbol = ? " +
+                    " and StockClosedTransaction.sellDatetime > ? " +
+                    "order by StockClosedTransaction.sellDatetime desc";
+                result = session.
+                    createQuery(queryString, StockClosedTransaction.class).
+                    setParameter(0, symbol, StringType.INSTANCE).
+                    setParameter(1, t, TemporalType.TIMESTAMP).
+                    getResultList();
+            }
+        }
 
         this.model =
             new ArrayList<StockClosedTransactionData>();
