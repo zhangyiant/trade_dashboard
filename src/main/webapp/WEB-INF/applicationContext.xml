@@ -17,17 +17,13 @@
   </beans:bean>
   <beans:bean id="mySessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
     <beans:property name="dataSource" ref="myDataSource" />
-    <beans:property name="mappingResources">
-      <beans:list>
-        <beans:value>org/anteestudio/stock/StockClosedTransaction.hbm.xml</beans:value>
-        </beans:list>
-    </beans:property>
     <beans:property name="annotatedClasses">
       <beans:list>
         <beans:value>org.anteestudio.stock.hbm.AllInvestmentsHistory</beans:value>
         <beans:value>org.anteestudio.stock.hbm.StockCashTotalHistory</beans:value>
         <beans:value>org.anteestudio.stock.hbm.StockInfo</beans:value>
         <beans:value>org.anteestudio.stock.hbm.StockTransaction</beans:value>
+        <beans:value>org.anteestudio.stock.hbm.StockClosedTransaction</beans:value>
       </beans:list>
     </beans:property>
     <beans:property name="hibernateProperties">
@@ -64,6 +60,9 @@
     <beans:property name="sessionFactory" ref="mySessionFactory" />
   </beans:bean>
   <beans:bean id="stockTransactionsController" class="org.anteestudio.stock.dashboard.struts2.rest.StockTransactionsController" scope="prototype">
+    <beans:property name="sessionFactory" ref="mySessionFactory" />
+  </beans:bean>
+  <beans:bean id="stockClosedTransactionsController" class="org.anteestudio.stock.dashboard.struts2.rest.StockClosedTransactionsController" scope="prototype">
     <beans:property name="sessionFactory" ref="mySessionFactory" />
   </beans:bean>
 </beans:beans>
