@@ -12,7 +12,7 @@
         <select class="form-control" ng-model="symbol">
             <option ng-repeat="stockInfo in stockInfos"
                     value="{{stockInfo.symbol}}">
-                {{stockInfo.name}}
+                {{stockInfo.symbol}}-{{stockInfo.name}}
             </option>
         </select>
         <button class="btn btn-default" ng-click="getData()">Search</button>
