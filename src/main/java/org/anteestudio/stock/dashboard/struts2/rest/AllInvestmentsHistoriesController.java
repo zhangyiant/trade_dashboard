@@ -57,6 +57,8 @@ public class AllInvestmentsHistoriesController
         } else {
             if (period.equals("1month")) {
                 t = i.minusSeconds(60*60*24*30);
+            } else if (period.equals("3month")) {
+                t = i.minusSeconds(3*60*60*24*30);
             } else if (period.equals("6month")) {
                 t = i.minusSeconds(6*60*60*24*30);
             } else if (period.equals("1year")) {
