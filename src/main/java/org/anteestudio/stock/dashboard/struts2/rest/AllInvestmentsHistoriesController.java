@@ -45,13 +45,15 @@ public class AllInvestmentsHistoriesController
         if (period == null) {
             queryString = "from AllInvestmentsHistory AllInvestmentsHistory " +
                 "order by AllInvestmentsHistory.datetime desc";
-            result = (List<AllInvestmentsHistory>)session.
-                createQuery(queryString).list();
+            result = session.
+                createQuery(queryString,
+                            AllInvestmentsHistory.class).getResultList();
         } else if (period.equals("all")) {
             queryString = "from AllInvestmentsHistory AllInvestmentsHistory " +
                 "order by AllInvestmentsHistory.datetime desc";
-            result = (List<AllInvestmentsHistory>)session.
-                createQuery(queryString).list();
+            result = session.
+                createQuery(queryString, AllInvestmentsHistory.class).
+                getResultList();
         } else {
             if (period.equals("1month")) {
                 t = i.minusSeconds(60*60*24*30);
@@ -63,12 +65,13 @@ public class AllInvestmentsHistoriesController
                 t = i;
             }
             result =
-                (List<AllInvestmentsHistory>)session.
+                session.
                 createQuery("from AllInvestmentsHistory AllInvestmentsHistory " +
-                            "where AllInvestmentsHistory.datetime > :timestamp " + 
-                            "order by AllInvestmentsHistory.datetime desc").
-                setParameter("timestamp", t, TemporalType.TIMESTAMP).
-                list();
+                            "where AllInvestmentsHistory.datetime > ? " + 
+                            "order by AllInvestmentsHistory.datetime desc",
+                            AllInvestmentsHistory.class).
+                setParameter(0, t, TemporalType.TIMESTAMP).
+                getResultList();
         }
 
         this.model = new ArrayList<AllInvestmentsHistoryData>();
