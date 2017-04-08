@@ -13,14 +13,4 @@
     <filter-name>struts2</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-  <servlet>
-    <display-name>HelloWorldServlet</display-name>
-    <servlet-name>HelloWorldServlet</servlet-name>
-    <servlet-class>HelloWorldServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>HelloWorldServlet</servlet-name>
-    <url-pattern>/HelloWorld</url-pattern>
-  </servlet-mapping>
 </web-app>
