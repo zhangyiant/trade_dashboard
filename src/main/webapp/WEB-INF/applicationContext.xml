@@ -20,7 +20,6 @@
     <beans:property name="mappingResources">
       <beans:list>
         <beans:value>org/anteestudio/stock/StockClosedTransaction.hbm.xml</beans:value>
-        <beans:value>org/anteestudio/stock/StockTransaction.hbm.xml</beans:value>
         </beans:list>
     </beans:property>
     <beans:property name="annotatedClasses">

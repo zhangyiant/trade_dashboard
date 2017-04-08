@@ -18,18 +18,9 @@
     <servlet-name>HelloWorldServlet</servlet-name>
     <servlet-class>HelloWorldServlet</servlet-class>
   </servlet>
-  <servlet>
-    <display-name>HelloWorldServlet2</display-name>
-    <servlet-name>HelloWorldServlet2</servlet-name>
-    <servlet-class>HelloWorldServlet2</servlet-class>
-  </servlet>
 
   <servlet-mapping>
     <servlet-name>HelloWorldServlet</servlet-name>
     <url-pattern>/HelloWorld</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>HelloWorldServlet2</servlet-name>
-    <url-pattern>/HelloWorld2</url-pattern>
   </servlet-mapping>
 </web-app>
