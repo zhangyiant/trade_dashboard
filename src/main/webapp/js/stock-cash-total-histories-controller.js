@@ -64,7 +64,8 @@ app.controller('myCtrl', function($scope, $http) {
         $http({
             method: "GET",
             url: "rest/stock-cash-total-histories.json",
-            params: {symbol: $scope.symbol}
+            params: {symbol: $scope.symbol,
+                     period: $scope.period}
         }).then(function successCallback(response) {
             $scope.stockCashTotalHistories = response.data;
             updateChart();
@@ -87,6 +88,7 @@ app.controller('myCtrl', function($scope, $http) {
     }
     updateStockInfos();
     $scope.percent="value";
+    $scope.period="all";
 });
 app.filter("epochMilliToDatetimeString", function () {
     return function(epochMilli) {

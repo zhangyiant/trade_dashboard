@@ -49,21 +49,61 @@ public class StockCashTotalHistoriesController
         Instant t;
         String queryString;
 
+        if (period.equals("all")) {
+            t = i.minusSeconds(120*60*60*24*30);
+        } else if (period.equals("1month")) {
+            t = i.minusSeconds(1*60*60*24*30);
+        } else if (period.equals("3month")) {
+            t = i.minusSeconds(3*60*60*24*30);
+        } else if (period.equals("6month")) {
+            t = i.minusSeconds(6*60*60*24*30);
+        } else if (period.equals("1year")) {
+            t = i.minusSeconds(12*60*60*24*30);
+        } else {
+            t = i;
+        }
+
         List<StockCashTotalHistory> result;
         if (symbol == null) {
-            queryString = "from StockCashTotalHistory StockCashTotalHistory " +
-                "order by StockCashTotalHistory.datetime desc";
-            result = session.
-                createQuery(queryString, StockCashTotalHistory.class).
-                getResultList();
+            if (period.equals("all")) {
+                queryString = "from StockCashTotalHistory " +
+                    "StockCashTotalHistory " +
+                    "order by StockCashTotalHistory.datetime desc";
+                result = session.
+                    createQuery(queryString, StockCashTotalHistory.class).
+                    getResultList();
+            } else {
+                queryString = "from StockCashTotalHistory " +
+                    "StockCashTotalHistory " +
+                    "where StockCashTotalHistory.datetime > ? " +
+                    "order by StockCashTotalHistory.datetime desc";
+                result = session.
+                    createQuery(queryString, StockCashTotalHistory.class).
+                    setParameter(0, t, TemporalType.TIMESTAMP).
+                    getResultList();
+            }
         } else {
-            queryString = "from StockCashTotalHistory StockCashTotalHistory " +
-                "where StockCashTotalHistory.symbol = ? " +
-                "order by StockCashTotalHistory.datetime desc";
-            result = session.
-                createQuery(queryString, StockCashTotalHistory.class).
-                setParameter(0, symbol, StringType.INSTANCE).
-                getResultList();
+            if (period.equals("all")) {
+                queryString = "from StockCashTotalHistory " +
+                    "StockCashTotalHistory " +
+                    "where StockCashTotalHistory.symbol = ? " +
+                    "order by StockCashTotalHistory.datetime desc";
+                result = session.
+                    createQuery(queryString, StockCashTotalHistory.class).
+                    setParameter(0, symbol, StringType.INSTANCE).
+                    getResultList();
+            } else {
+                queryString = "from StockCashTotalHistory " +
+                    "StockCashTotalHistory " +
+                    "where StockCashTotalHistory.symbol = ? " +
+                    " and StockCashTotalHistory.datetime > ? " +
+                    "order by StockCashTotalHistory.datetime desc";
+                result = session.
+                    createQuery(queryString, StockCashTotalHistory.class).
+                    setParameter(0, symbol, StringType.INSTANCE).
+                    setParameter(1, t, TemporalType.TIMESTAMP).
+                    getResultList();
+            }
         }
         this.model = new ArrayList<StockCashTotalHistoryData>();
         for (StockCashTotalHistory a: result) {

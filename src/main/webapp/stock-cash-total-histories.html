@@ -15,6 +15,13 @@
                 {{stockInfo.symbol}}-{{stockInfo.name}}
             </option>
         </select>
+        <select class="form-control" ng-model="period">
+            <option value="1month">1 month</option>
+            <option value="3month">3 month</option>
+            <option value="6month">6 months</option>
+            <option value="1year">1 year</option>
+            <option value="all">All</option>
+        </select>
         <select class="form-control" ng-model="percent">
             <option value="value">Value</option>
             <option value="percent">Percentage</option>
