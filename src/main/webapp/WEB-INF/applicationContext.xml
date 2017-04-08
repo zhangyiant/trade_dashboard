@@ -28,6 +28,7 @@
         <beans:value>org.anteestudio.stock.hbm.AllInvestmentsHistory</beans:value>
         <beans:value>org.anteestudio.stock.hbm.StockCashTotalHistory</beans:value>
         <beans:value>org.anteestudio.stock.hbm.StockInfo</beans:value>
+        <beans:value>org.anteestudio.stock.hbm.StockTransaction</beans:value>
       </beans:list>
     </beans:property>
     <beans:property name="hibernateProperties">
@@ -61,6 +62,9 @@
     <beans:property name="sessionFactory" ref="mySessionFactory" />
   </beans:bean>
   <beans:bean id="stockInfosController" class="org.anteestudio.stock.dashboard.struts2.rest.StockInfosController" scope="prototype">
+    <beans:property name="sessionFactory" ref="mySessionFactory" />
+  </beans:bean>
+  <beans:bean id="stockTransactionsController" class="org.anteestudio.stock.dashboard.struts2.rest.StockTransactionsController" scope="prototype">
     <beans:property name="sessionFactory" ref="mySessionFactory" />
   </beans:bean>
 </beans:beans>
