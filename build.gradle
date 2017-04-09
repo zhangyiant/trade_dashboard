@@ -31,6 +31,7 @@ dependencies {
   compile 'mysql:mysql-connector-java:5.1.40'
   compile("org.springframework:spring-context:4.3.3.RELEASE")
   compile("org.springframework:spring-web:4.3.3.RELEASE")
+  compile("org.springframework:spring-webmvc:4.3.3.RELEASE")
   compile("org.springframework:spring-orm:4.3.3.RELEASE")
   compile("org.apache.struts:struts2-core:2.5.10.1")
   compile("org.apache.struts:struts2-convention-plugin:2.5.10.1")

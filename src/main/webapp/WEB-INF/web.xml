@@ -11,6 +11,15 @@
   </filter>
   <filter-mapping>
     <filter-name>struts2</filter-name>
-    <url-pattern>/*</url-pattern>
+    <url-pattern>/rest/*</url-pattern>
   </filter-mapping>
+  <servlet>
+    <servlet-name>springdispatcher</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>springdispatcher</servlet-name>
+    <url-pattern>/spring/*</url-pattern>
+  </servlet-mapping>
 </web-app>
