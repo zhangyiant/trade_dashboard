@@ -9,6 +9,12 @@
          <script src="js/stock-transactions-controller.js"></script>
     </head>
     <body ng-controller="myCtrl">
+        <select class="form-control" ng-model="symbol">
+            <option ng-repeat="stockInfo in stockInfos"
+                    value="{{stockInfo.symbol}}">
+                {{stockInfo.symbol}}-{{stockInfo.name}}
+            </option>
+        </select>
         <select class="form-control" ng-model="period">
             <option value="1month">1 month</option>
             <option value="3month">3 month</option>
