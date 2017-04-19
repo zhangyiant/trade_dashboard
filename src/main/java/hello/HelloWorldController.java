@@ -10,6 +10,6 @@ public class HelloWorldController {
     @RequestMapping("/helloWorld")
     public String helloWorld(Model model) {
         model.addAttribute("message", "Hello World!");
-        return "helloWorld";
+        return "/jsp/helloWorld.jsp";
     }
 }
