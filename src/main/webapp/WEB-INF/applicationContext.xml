@@ -25,6 +25,7 @@
         <beans:value>org.anteestudio.stock.hbm.StockTransaction</beans:value>
         <beans:value>org.anteestudio.stock.hbm.StockClosedTransaction</beans:value>
         <beans:value>org.anteestudio.stock.hbm.StockCash</beans:value>
+        <beans:value>org.anteestudio.stock.hbm.TradeKeepAlive</beans:value>
       </beans:list>
     </beans:property>
     <beans:property name="hibernateProperties">
