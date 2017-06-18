@@ -23,6 +23,7 @@ public class StockTransactionsController
     private List<StockTransactionData> model;
     private String period;
     private String symbol;
+    private Boolean sort;
 
     public SessionFactory getSessionFactory() {
         return this.sessionFactory;
@@ -40,6 +41,24 @@ public class StockTransactionsController
     public void setSymbol(String symbol) {
         this.symbol = symbol;
         return;
+    }
+
+    public void setSort(Boolean sort) {
+        this.sort = sort;
+        return;
+    }
+
+    private String addSortString(String queryString) {
+        String result;
+        if (this.sort) {
+            result = queryString +
+                " order by StockTransaction.price asc," +
+                " StockTransaction.datetime desc";
+        } else {
+            result = queryString +
+                " order by StockTransaction.datetime desc";
+        }
+        return result;
     }
 
     @Action(className="stockTransactionsController")
@@ -71,16 +90,16 @@ public class StockTransactionsController
         if (symbol == null) {
             if (period.equals("all")) {
                 queryString = "from StockTransaction " +
-                    "StockTransaction " +
-                    "order by StockTransaction.datetime desc";
+                    "StockTransaction";
+                queryString = this.addSortString(queryString);
                 result = session.
                     createQuery(queryString, StockTransaction.class).
                     getResultList();
             } else {
                 queryString = "from StockTransaction " +
                     "StockTransaction " +
-                    "where StockTransaction.datetime > ? " +
-                    "order by StockTransaction.datetime desc";
+                    "where StockTransaction.datetime > ?";
+                queryString = this.addSortString(queryString);
                 result = session.
                     createQuery(queryString, StockTransaction.class).
                     setParameter(0, t, TemporalType.TIMESTAMP).
@@ -90,8 +109,8 @@ public class StockTransactionsController
             if (period.equals("all")) {
                 queryString = "from StockTransaction " +
                     "StockTransaction " +
-                    "where StockTransaction.symbol = ? " +
-                    "order by StockTransaction.datetime desc";
+                    "where StockTransaction.symbol = ?";
+                queryString = this.addSortString(queryString);
                 result = session.
                     createQuery(queryString, StockTransaction.class).
                     setParameter(0, symbol, StringType.INSTANCE).
@@ -100,8 +119,8 @@ public class StockTransactionsController
                 queryString = "from StockTransaction " +
                     "StockTransaction " +
                     "where StockTransaction.symbol = ? " +
-                    " and StockTransaction.datetime > ? " +
-                    "order by StockTransaction.datetime desc";
+                    " and StockTransaction.datetime > ?";
+                queryString = this.addSortString(queryString);
                 result = session.
                     createQuery(queryString, StockTransaction.class).
                     setParameter(0, symbol, StringType.INSTANCE).
