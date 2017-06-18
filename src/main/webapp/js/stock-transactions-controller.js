@@ -7,6 +7,7 @@ app.controller('myCtrl', function($scope, $http) {
         if ($scope.symbol !== "all") {
             params.symbol = $scope.symbol;
         }
+      params.sort = $scope.sort;
         $http({
             method: "GET",
             url: "rest/stock-transactions.json",
@@ -34,7 +35,8 @@ app.controller('myCtrl', function($scope, $http) {
         });
         return;
     }
-    $scope.period="1month";
+  $scope.period="1month";
+  $scope.sort = false;
     updateStockInfos();
 });
 app.filter("epochMilliToDatetimeString", function () {
