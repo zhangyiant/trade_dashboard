@@ -35,7 +35,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="nobleMetalPrice in nobleMetalPrices">
+                <tr ng-repeat="nobleMetalPrice in nobleMetalPrices | orderBy: 'symbol'">
                     <td>
                         {{nobleMetalPrice.symbol}}
                     </td>
