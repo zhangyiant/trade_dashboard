@@ -32,7 +32,7 @@ public class NobleMetalPriceController {
         List<NobleMetalPrice> result;
         queryString = "from NobleMetalPrice NobleMetalPrice " +
             "where NobleMetalPrice.symbol = ? " +
-            "order by NobleMetalPrice.updateDatetime";
+            "order by NobleMetalPrice.updateDatetime desc";
         result = session.
             createQuery(queryString, NobleMetalPrice.class).
             setParameter(0, symbol, StringType.INSTANCE).
