@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+    <head>
+        <title>Stock Prices</title>
+        <meta charset="utf-8" />
+        <link href='bootstrap-3.3.7-dist/css/bootstrap.min.css' rel='stylesheet'>
+        <script src="js/angular.min.js"></script>
+         <script src="js/stock-price-controller.js"></script>
+    </head>
+    <body ng-controller="myCtrl">
+        <table class='table table-striped'>
+            <thead>
+                <tr>
+                    <th>
+                        symbol
+                    </th>
+                    <th>
+                        price
+                    </th>
+                    <th>
+                      update datetime
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="stockPrice in stockPrices | orderBy: 'symbol'">
+                    <td>
+                        {{stockPrice.symbol}}
+                    </td>
+                    <td>
+                        {{stockPrice.price}}
+                    </td>
+                    <td>
+                        {{stockPrice.strDatetime}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
