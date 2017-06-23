@@ -35,7 +35,7 @@ app.controller('myCtrl', function($scope, $http) {
         });
         return;
     }
-  $scope.period="1month";
+  $scope.period="all";
   $scope.sort = false;
     updateStockInfos();
 });
