@@ -35,7 +35,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="stockPrice in stockPrices | orderBy: 'symbol'">
+              <tr ng-repeat="stockPrice in stockPrices | orderBy: 'symbol'"
+                  ng-class="stockPrice | rowClass">
                     <td>
                         {{stockPrice.symbol}}
                     </td>

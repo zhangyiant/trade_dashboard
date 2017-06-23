@@ -61,3 +61,23 @@ app.controller('myCtrl', function($scope, $http) {
   };
   $scope.getData();
 });
+app.filter("rowClass", function () {
+  return function(nobleMetalPrice) {
+    if ("buyPrice1" in nobleMetalPrice) {
+      if (nobleMetalPrice.buyPrice > nobleMetalPrice.buyPrice1) {
+        if ("buyPrice2" in nobleMetalPrice) {
+          if (nobleMetalPrice.buyPrice < nobleMetalPrice.buyPrice2) {
+            return "warning";
+          } else {
+            return "danger";
+          }
+        } else {
+          return "warning";
+        }
+      } else if (nobleMetalPrice.sellPrice < nobleMetalPrice.buyPrice1){
+        return "success";
+      }
+    }
+    return "";
+  };
+});

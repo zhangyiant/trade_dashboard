@@ -64,3 +64,23 @@ app.controller('myCtrl', function($scope, $http) {
   };
   $scope.getData();
 });
+app.filter("rowClass", function () {
+  return function(stockPrice) {
+    if ("buyPrice1" in stockPrice) {
+      if (stockPrice.price < stockPrice.buyPrice1) {
+        return "success";
+      } else {
+        if ("buyPrice2" in stockPrice) {
+          if (stockPrice.price < stockPrice.buyPrice2) {
+            return "warning";
+          } else {
+            return "danger";
+          }
+        } else {
+          return "warning";
+        }
+      }
+    }
+    return "";
+  };
+});
