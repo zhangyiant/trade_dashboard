@@ -69,12 +69,16 @@ app.filter("rowClass", function () {
           if (nobleMetalPrice.buyPrice < nobleMetalPrice.buyPrice2) {
             return "warning";
           } else {
-            return "danger";
+            if (nobleMetalPrice.buyPrice < (nobleMetalPrice.buyPrice1 * 1.02)) {
+              return "warning";
+            } else {
+              return "danger";
+            }
           }
         } else {
           return "warning";
         }
-      } else if (nobleMetalPrice.sellPrice < nobleMetalPrice.buyPrice1){
+      } else if (nobleMetalPrice.sellPrice < (nobleMetalPrice.buyPrice1 * 0.98)){
         return "success";
       }
     }
