@@ -68,16 +68,24 @@ app.filter("rowClass", function () {
   return function(stockPrice) {
     if ("buyPrice1" in stockPrice) {
       if (stockPrice.price < stockPrice.buyPrice1) {
-        return "success";
+        if (stockPrice.price < stockPrice.buyPrice1 - 0.2) {
+          return "success";
+        } else {
+          return "";
+        }
       } else {
-        if ("buyPrice2" in stockPrice) {
-          if (stockPrice.price < stockPrice.buyPrice2) {
-            return "warning";
+        if (stockPrice.price > stockPrice.buyPrice1 + 0.3) {
+          if ("buyPrice2" in stockPrice) {
+            if (stockPrice.price < stockPrice.buyPrice2) {
+              return "warning";
+            } else {
+              return "danger";
+            }
           } else {
-            return "danger";
+            return "warning";
           }
         } else {
-          return "warning";
+          return "";
         }
       }
     }
