@@ -72,8 +72,8 @@ app.controller('myCtrl', function($scope, $http) {
         });
         return;
     };
-    $scope.period = "all";
-    $scope.percent = "value";
+    $scope.period = "1month";
+    $scope.percent = "percent";
     $scope.getData();
 });
 app.filter("epochMilliToDatetimeString", function () {
