@@ -1,7 +1,7 @@
 buildscript {
   repositories {
     maven {
-    	  url "http://192.168.1.249:8081/artifactory/jcenter"
+	  url 'http://maven.aliyun.com/nexus/content/groups/public/'
   	  }
     //jcenter()
   }
@@ -13,7 +13,7 @@ buildscript {
 
 repositories {
   maven {
-  url "http://192.168.1.249:8081/artifactory/jcenter"
+  url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'
   }
 
   //jcenter()

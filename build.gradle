@@ -13,9 +13,11 @@ compileJava.options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
 
 // test
 repositories {
-  //mavenCentral()
   maven {
-  url "http://192.168.1.239:8081/artifactory/maven2"
+    url 'http://maven.aliyun.com/nexus/content/groups/public/'
+  }
+  maven {
+    url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'
   }
 }
 
@@ -27,6 +29,7 @@ gretty {
 
 dependencies {
   compile("javax.servlet:jstl:1.2")
+  compile("javax.xml.bind:jaxb-api:2.3.0")
   compile 'org.hibernate:hibernate-core:5.2.3.Final'
   compile("org.apache.commons:commons-dbcp2:2.1.1")
   compile 'mysql:mysql-connector-java:5.1.40'
@@ -34,10 +37,10 @@ dependencies {
   compile("org.springframework:spring-web:4.3.3.RELEASE")
   compile("org.springframework:spring-webmvc:4.3.3.RELEASE")
   compile("org.springframework:spring-orm:4.3.3.RELEASE")
-  compile("org.apache.struts:struts2-core:2.5.10.1")
-  compile("org.apache.struts:struts2-convention-plugin:2.5.10.1")
-  compile("org.apache.struts:struts2-spring-plugin:2.5.10.1")
-  compile("org.apache.struts:struts2-rest-plugin:2.5.10.1")
+  compile("org.apache.struts:struts2-core:2.5.22")
+  compile("org.apache.struts:struts2-convention-plugin:2.5.22")
+  compile("org.apache.struts:struts2-spring-plugin:2.5.22")
+  compile("org.apache.struts:struts2-rest-plugin:2.5.22")
   //compile("org.apache.struts.xwork:xwork-core:2.3.32")
   compile("org.apache.logging.log4j:log4j-core:2.8")
   testCompile("org.springframwork:spring-test:4.3.3.RELEASE")
