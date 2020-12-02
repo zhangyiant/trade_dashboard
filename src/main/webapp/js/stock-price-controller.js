@@ -1,7 +1,9 @@
 var app = angular.module("myApp", []);
 app.controller('myCtrl', function($scope, $http) {
 
-  var symbols = ["000568",
+    var symbols = [
+	"000001",
+	"000568",
                  "002367",
                  "600019",
                  "600115",
